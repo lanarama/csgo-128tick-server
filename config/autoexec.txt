@@ -1,0 +1,4 @@
+log on //This is set to turn on logging! Don't put this in your server.cfg
+sv_password "" //Only set this if you intend to have a private server!
+exec banned_user.cfg
+exec banned_ip.cfg
