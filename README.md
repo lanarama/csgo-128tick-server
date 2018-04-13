@@ -1,7 +1,7 @@
 # LANARAMA-CSGO
 
 Dockerized CSGO Server. Optimized for 128 Ticks.
-As the Image is quite large (~16GB) it will not be pushed to Dockerhub as frequent. To build a recent version, just call `docker build . -t lanarama/csog-128tick``
+As the Image is quite large (~16GB) it will not be pushed to Dockerhub as frequent. To build a recent version, just call `docker build . -t lanarama/csog-128tick`
 
 ## Launch options
 Launch options are parsed by the ENV. Following options are available:
