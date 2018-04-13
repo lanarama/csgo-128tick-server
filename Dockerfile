@@ -1,4 +1,4 @@
-FROM xvzf/lanarama-steamcmd
+FROM lanarama/steamcmd
 MAINTAINER Matthias Riegler <matthias@xvzf.tech>
 
 # Install CSGO
