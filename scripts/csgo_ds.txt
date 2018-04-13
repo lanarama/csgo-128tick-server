@@ -1,4 +1,0 @@
-login anonymous
-force_inistall_dir ./csgo
-app_update 740 validate
-quit
