@@ -31,3 +31,31 @@ A custom server name can be set by assigning `CSGO_SERVERNAME`.
 
 ### Going online
 In order to create public server, `CSGO_GSLT` has to be populated by the correct GSLT.
+
+### Startup script
+```python
+import os
+
+OFFSET = 0 # In case of game update and you don't want to loose logs
+
+GSLT_TOKEN = [
+  # Add here
+]
+
+for i in range(len(GSLT_TOKEN)):
+  print(f"starting csgo-{i}")
+  os.system(" ".join([
+    "docker run -d",
+    f"-e CSGO_SERVERNAME=\"Lanarama Gameserver {i + OFFSET}\"",
+    "-e CSGO_GAMEMODE=\"competitive\"",
+    "-e CSGO_RCON_PASSWORD=\"lanarama123\"",
+    f"-e CSGO_GSTL=\"{GSLT_TOKEN[i]}\"",
+    "--network=servernet",
+    f"--name=csgo-{i + OFFSET}",
+    "lanarama/csgo"
+  ]))
+
+
+for i in range(len(GSLT_TOKEN)):
+  os.system(f"docker inspect csgo-{i + OFFSET} | jq '.[0].NetworkSettings.Networks.servernet.IPAddress' -r")
+```
