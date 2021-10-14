@@ -13,6 +13,8 @@ Launch options are parsed by the ENV. Following options are available:
 You can spin up a server using e.g. <br>
 `docker run -e CSGO_SERVERNAME="Lanarama Gameserver 01" -e CSGO_GAMEMODE="competitive" -e CSGO_RCON_PASSWORD="dontusethispassword" -d lanarama/csgo-128tick`
 
+Macvlan docker is a good idea; run via: `docker run  -e CSGO_SERVERNAME="Lanarama Gameserver 0" -e CSGO_GAMEMODE="competitive" -e CSGO_RCON_PASSWORD="dontusethispassword" -e CSGO_GSTL="<redacted>" --network=servernet --name=csgo-0 lanarama/csgo`
+
 ### Gamemode options
 In order to set the gamemode, set `CSGO_GAMEMODE` to one of the following options:
   - deathmatch
