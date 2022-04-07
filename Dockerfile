@@ -23,7 +23,7 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 WORKDIR $STEAMCMD
 
 
-FROM steamcmd
+FROM steamcmd as csgo-base
 MAINTAINER Matthias Riegler <matthias@xvzf.tech>
 
 # Install CSGO
@@ -47,3 +47,8 @@ EXPOSE 27015/udp
 EXPOSE 27005/udp
 # SourceTV, forward so GOTV can be used
 EXPOSE 27020/udp
+
+FROM csgo-base
+
+COPY --chown=steam:steam ./scripts/install-get5.sh install-get5.sh
+RUN  bash install-get5.sh $(pwd)/csgo/csgo/
