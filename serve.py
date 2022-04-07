@@ -33,7 +33,7 @@ class CSGOBuilder(object):
             self.arguments.append(setting)
     
 
-    def set_gamemode(self, name="deathmatch"):
+    def set_gamemode(self, name="wingman"):
         """
         Sets the gamemode, available options:
             - deathmatch
@@ -41,6 +41,7 @@ class CSGOBuilder(object):
             - demolition
             - casual
             - competitive
+            - wingman
         """
         def set_mode(gametype, gamemode):
             self.arguments.append(f"+game_type {gametype}")
@@ -54,6 +55,9 @@ class CSGOBuilder(object):
 
         elif name == "demolition":
             set_mode(1, 1) # Mode for Demolition
+
+        elif name =="wingman":
+            set_mode(0, 2) # Mode for Wingman
 
         elif name == "casual":
             set_mode(0, 0) # Mode for Classic Casual
