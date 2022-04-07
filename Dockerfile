@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.04 as steamcmd
 MAINTAINER Matthias Riegler <matthias@xvzf.tech>
 
 ENV USER steam
@@ -17,15 +17,13 @@ RUN apt-get -y update \
 
     USER $USER
 
- # Install steamcmd
- RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"  | tar xz -C $STEAMCMD
+# Install steamcmd
+RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"  | tar xz -C $STEAMCMD
 
- WORKDIR $STEAMCMD
-
-
+WORKDIR $STEAMCMD
 
 
-FROM lanarama/steamcmd
+FROM steamcmd
 MAINTAINER Matthias Riegler <matthias@xvzf.tech>
 
 # Install CSGO
