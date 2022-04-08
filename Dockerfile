@@ -51,4 +51,5 @@ EXPOSE 27020/udp
 FROM csgo-base
 
 COPY --chown=steam:steam ./scripts/install-get5.sh install-get5.sh
-RUN  bash install-get5.sh $(pwd)/csgo/csgo/
+# chmod 755 so have the proper folder permissions, the install script doesn't set it up properly.
+RUN  bash install-get5.sh $(pwd)/csgo/csgo/ && chmod -R 755 $(pwd)/csgo/csgo/
