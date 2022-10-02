@@ -20,11 +20,10 @@ USER $USER
 # Install steamcmd
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"  | tar xz -C $STEAMCMD \
     && ./${STEAMCMD}/steamcmd.sh +quit \
-    && mkdir -p ${HOMEDIR}/.steam/sdk32 \
+    && mkdir -p ${HOMER}/.steam/sdk32 \
     && ln -s ${STEAMCMD}/linux32/steamclient.so ${HOME}/.steam/sdk32/steamclient.so \
     && ln -s ${STEAMCMD}/linux32/steamcmd ${STEAMCMD}/linux32/steam \
-    && ln -s ${STEAMCMD}/steamcmd.sh ${STEAMCMD}/steam.sh \
-
+    && ln -s ${STEAMCMD}/steamcmd.sh ${STEAMCMD}/steam.sh
 
 WORKDIR $STEAMCMD
 
