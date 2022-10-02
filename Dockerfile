@@ -15,10 +15,16 @@ RUN apt-get -y update \
     && mkdir $STEAMCMD \
     && chown $USER:$USER $STEAMCMD
 
-    USER $USER
+USER $USER
 
 # Install steamcmd
-RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"  | tar xz -C $STEAMCMD
+RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"  | tar xz -C $STEAMCMD \
+    && ./${STEAMCMD}/steamcmd.sh +quit \
+    && mkdir -p ${HOMEDIR}/.steam/sdk32 \
+    && ln -s ${STEAMCMD}/linux32/steamclient.so ${HOME}/.steam/sdk32/steamclient.so \
+    && ln -s ${STEAMCMD}/linux32/steamcmd ${STEAMCMD}/linux32/steam \
+    && ln -s ${STEAMCMD}/steamcmd.sh ${STEAMCMD}/steam.sh \
+
 
 WORKDIR $STEAMCMD
 
@@ -51,5 +57,5 @@ EXPOSE 27020/udp
 FROM csgo-base
 
 COPY --chown=steam:steam ./scripts/install-get5.sh install-get5.sh
-# chmod 755 so have the proper folder permissions, the install script doesn't set it up properly.
-RUN  bash install-get5.sh $(pwd)/csgo/csgo/ && chmod -R 755 $(pwd)/csgo/csgo/
+# chmod for the full folder, otherwise we run into issues. Needs to be fixed properly :)
+RUN  bash install-get5.sh $(pwd)/csgo/csgo/ && chmod 755 -R $(pwd)/csgo/csgo/
